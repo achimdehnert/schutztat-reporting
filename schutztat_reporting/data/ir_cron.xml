@@ -3,7 +3,7 @@
     <data noupdate="1">
         <record id="cron_sync_assessments" model="ir.cron">
             <field name="name">Schutztat: Sync Assessments</field>
-            <field name="model_id" ref="model_schutztat_sync_log"/>
+            <field name="model_id" search="[('model', '=', 'schutztat.sync.log')]"/>
             <field name="state">code</field>
             <field name="code">model.action_sync_assessments()</field>
             <field name="interval_number">15</field>
@@ -14,7 +14,7 @@
 
         <record id="cron_sync_hazards" model="ir.cron">
             <field name="name">Schutztat: Sync Hazards</field>
-            <field name="model_id" ref="model_schutztat_sync_log"/>
+            <field name="model_id" search="[('model', '=', 'schutztat.sync.log')]"/>
             <field name="state">code</field>
             <field name="code">model.action_sync_hazards()</field>
             <field name="interval_number">15</field>
@@ -25,7 +25,7 @@
 
         <record id="cron_sync_actions" model="ir.cron">
             <field name="name">Schutztat: Sync Action Items</field>
-            <field name="model_id" ref="model_schutztat_sync_log"/>
+            <field name="model_id" search="[('model', '=', 'schutztat.sync.log')]"/>
             <field name="state">code</field>
             <field name="code">model.action_sync_actions()</field>
             <field name="interval_number">15</field>
