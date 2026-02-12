@@ -36,7 +36,6 @@ def _post_init_hook(env):
                     "code": cron["code"],
                     "interval_number": 15,
                     "interval_type": "minutes",
-                    "numbercall": -1,
                     "active": True,
                 }
             )
