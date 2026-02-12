@@ -19,13 +19,13 @@
     },
     "data": [
         "security/ir.model.access.csv",
-        "data/ir_cron.xml",
         "views/assessment_views.xml",
         "views/hazard_views.xml",
         "views/action_item_views.xml",
         "views/sync_log_views.xml",
         "views/menu_views.xml",
     ],
+    "post_init_hook": "_post_init_hook",
     "installable": True,
     "application": True,
 }
