@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_schutztat_assessment_tree" model="ir.ui.view">
-        <field name="name">schutztat.assessment.tree</field>
+    <record id="view_schutztat_assessment_list" model="ir.ui.view">
+        <field name="name">schutztat.assessment.list</field>
         <field name="model">schutztat.assessment</field>
         <field name="arch" type="xml">
-            <tree decoration-success="status == 'approved'" decoration-muted="status == 'archived'">
+            <list decoration-success="status == 'approved'" decoration-muted="status == 'archived'">
                 <field name="title"/>
                 <field name="category"/>
                 <field name="status" widget="badge"
@@ -14,7 +14,7 @@
                 <field name="hazard_count"/>
                 <field name="action_count"/>
                 <field name="synced_at"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -50,7 +50,7 @@
                         </page>
                         <page string="Hazards">
                             <field name="hazard_ids" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="title"/>
                                     <field name="severity"/>
                                     <field name="probability"/>
@@ -59,18 +59,18 @@
                                            decoration-danger="risk_level == 'critical'"
                                            decoration-warning="risk_level == 'high'"
                                            decoration-info="risk_level == 'medium'"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Actions">
                             <field name="action_ids" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="title"/>
                                     <field name="status" widget="badge"/>
                                     <field name="priority"/>
                                     <field name="due_date"/>
                                     <field name="is_overdue" widget="boolean"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -82,6 +82,6 @@
     <record id="action_schutztat_assessment" model="ir.actions.act_window">
         <field name="name">Assessments</field>
         <field name="res_model">schutztat.assessment</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>

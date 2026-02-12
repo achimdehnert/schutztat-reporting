@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_schutztat_action_item_tree" model="ir.ui.view">
-        <field name="name">schutztat.action.item.tree</field>
+    <record id="view_schutztat_action_item_list" model="ir.ui.view">
+        <field name="name">schutztat.action.item.list</field>
         <field name="model">schutztat.action.item</field>
         <field name="arch" type="xml">
-            <tree decoration-danger="is_overdue" decoration-success="status == 'done'">
+            <list decoration-danger="is_overdue" decoration-success="status == 'done'">
                 <field name="title"/>
                 <field name="status" widget="badge"
                        decoration-info="status == 'open'"
@@ -12,11 +12,11 @@
                        decoration-success="status == 'done'"/>
                 <field name="priority"/>
                 <field name="due_date"/>
-                <field name="is_overdue" invisible="1"/>
+                <field name="is_overdue" column_invisible="1"/>
                 <field name="assessment_id"/>
                 <field name="hazard_id"/>
                 <field name="synced_at"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -59,6 +59,6 @@
     <record id="action_schutztat_action_item" model="ir.actions.act_window">
         <field name="name">Action Items</field>
         <field name="res_model">schutztat.action.item</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>
