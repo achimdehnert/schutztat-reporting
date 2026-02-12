@@ -1,6 +1,7 @@
 """Schutztat SyncLog model — orchestrates Django API sync."""
 
 import logging
+from datetime import datetime
 
 import requests
 
@@ -8,7 +9,25 @@ from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
-DJANGO_API_BASE = "https://schutztat.iil.pet/api/v1"
+DJANGO_API_BASE = "https://demo.schutztat.de/api/v1"
+
+DATETIME_FIELDS = {
+    "approved_at",
+    "completed_at",
+    "django_created_at",
+    "django_updated_at",
+}
+
+
+def _parse_dt(value):
+    """Convert ISO 8601 datetime string to Odoo format."""
+    if not value:
+        return False
+    try:
+        dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        return dt.strftime("%Y-%m-%d %H:%M:%S")
+    except (ValueError, AttributeError):
+        return False
 
 
 class SchutztatSyncLog(models.Model):
@@ -136,10 +155,14 @@ class SchutztatSyncLog(models.Model):
                     break
 
                 for item in items:
-                    vals = {
-                        odoo_field: item.get(django_field)
-                        for django_field, odoo_field in field_mapping.items()
-                    }
+                    vals = {}
+                    for django_field, odoo_field in field_mapping.items():
+                        value = item.get(django_field)
+                        if odoo_field in DATETIME_FIELDS:
+                            value = _parse_dt(value)
+                        elif value is None:
+                            value = False
+                        vals[odoo_field] = value
                     vals["synced_at"] = fields.Datetime.now()
 
                     existing = target.search(
